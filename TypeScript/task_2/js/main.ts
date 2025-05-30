@@ -47,6 +47,26 @@ function createEmployee(salary: number | string): Director | Teacher {
 	}
 }
 
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee('$500'));
+function isDirector(employee: Director | Teacher): employee is Director {
+       return employee instanceof Director;
+}
+
+function executeWork(employee: Director | Teacher): string {
+	if (isDirector(employee)) {
+		return employee.workDirectorTasks();
+	} else {
+		return employee.workTeacherTasks();
+	}
+}
+
+// Déclaration d'un type littéral : seules ces deux valeurs sont valides
+type Subjects = "Math" | "History";
+
+// Fonction teachClass qui accepte uniquement les valeurs du type Subjects
+function teachClass(todayClass: Subjects): string {
+	if (todayClass === "Math") {
+		return "Teaching Math";
+	} else {
+		return "Teaching History";
+	}
+}
